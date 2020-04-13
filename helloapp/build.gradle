@@ -28,11 +28,26 @@ dependencies {
     // Use the awesome Spock testing and specification framework
     testImplementation 'org.spockframework:spock-core:1.3-groovy-2.5'
 
-    // org.slf4j.Logger
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
-    compile 'org.slf4j:slf4j-api:1.7.25'
+
+    //Slf4j needs one of these: 
+    //1. org.slf4j.Logger
+    // This gave error for log.debug and log.info --> log4j:WARN No appenders could be found for logger (helloapp.logger.HelloLogger).
+    //compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+    //compile 'org.slf4j:slf4j-api:1.7.25'
+    // Alternative: (for compile 'org.slf4j:slf4j-api:1.7.25')
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     //compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+
+    //2. org.apache.logging.log4j
+    // This gave a general error "ERROR StatusLogger No Log4j 2 configuration file found. Using default configuration (logging only errors to the console)... ..."
+    //    or user programmatically provided configurations. Set system property 'log4j2.debug' to show Log4j 2 internal initialization logging. 
+    //    See https://logging.apache.org/log4j/2.x/manual/configuration.html for instructions on how to configure Log4j 2
+
+    // but, at least logged when "log.error" was used
+    compile  'org.apache.logging.log4j:log4j-api:2.11.1'
+    compile  'org.apache.logging.log4j:log4j-core:2.11.1'
+    compile  'org.apache.logging.log4j:log4j-jul:2.11.1'
+    compile  'org.apache.logging.log4j:log4j-slf4j-impl:2.11.1'
 
 }
 

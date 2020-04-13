@@ -9,6 +9,7 @@ class HelloLogger {
         //log.setLevel(Level.WARN);
 
         println "Printing: hello groovy from class HelloWorld"
-        log.debug ("Logging: hello groovy from class HelloWorld")
+        log.error 'Logging: hello groovy from class HelloWorld'
+
     }
 }
