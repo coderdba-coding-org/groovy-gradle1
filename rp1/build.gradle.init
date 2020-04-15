@@ -1,0 +1,18 @@
+plugins {
+    id 'groovy'
+}
+
+group 'rp1'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.11'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    classpath "io.ratpack:ratpack-gradle:1.7.6"
+}
