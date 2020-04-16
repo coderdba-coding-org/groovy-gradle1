@@ -13,6 +13,6 @@ class App {
     static void main(String[] args) {
         println new App().greeting
 
-        new HelloLogger().logHello()
+        new HelloLogger().LogHello()
     }
 }
