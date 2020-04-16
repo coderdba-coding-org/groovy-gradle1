@@ -4,7 +4,7 @@ import groovy.util.logging.Slf4j
 
 @Slf4j
 class HelloLogger {
-    void LogHello() {
+    String LogHello() {
 
         //log.setLevel(Level.WARN);
 
@@ -14,11 +14,13 @@ class HelloLogger {
         log.trace 'Logging: hello groovy TRACE from class HelloWorld'
         log.info 'Logging: hello groovy INFO from class HelloWorld'
 
+        return "Logged Hello messages in application log - go there and check"
     }
 
     String SayHello() {
 
-        return "Hello"
+        // return a string "Hello" - note - no 'return' keyword is optional
+        return "Saying Hello"
 
     }
 }

@@ -5,6 +5,7 @@ import logger.HelloLogger
 
 ratpack {
 
+    // bindings initialize the mentioned classes
     bindings {
         bind(HelloLogger)
     }
@@ -20,10 +21,10 @@ ratpack {
 
         get ("messages") { HelloLogger helloLogger ->
 
-            helloLogger.LogHello()
+            render helloLogger.LogHello()
         }
 
-        //dumb way
+        //dumb way - use bindings instead
         //get ("messagesDumb") {
 
         //new HelloLogger().LogHello()
@@ -31,7 +32,7 @@ ratpack {
 
         get ("sayhello") { HelloLogger helloLogger ->
 
-            helloLogger.SayHello()
+            render helloLogger.SayHello()
         }
     }
 
