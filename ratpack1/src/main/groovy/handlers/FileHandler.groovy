@@ -27,7 +27,10 @@ class FileHandler {
         dst << "second line\n"
     }
 
-    Promise<String> PromiseSleepAppend1() {
+    // THIS ACTUALLY DOES NOT WORK WHEN CALLED
+    // GIVES ERROR: org.codehaus.groovy.runtime.typehandling.GroovyCastException:
+    // Cannot cast object 'PromiseSleepAppend1: Completed' with class 'java.lang.String' to class 'ratpack.exec.Promise'
+    Promise<String> PromiseSleepAppend0() {
         def src = new File("/tmp/source.txt")
         def dst = new File("/tmp/dest.txt")
         log.info 'SleepAppend1: appending first line'
@@ -39,6 +42,7 @@ class FileHandler {
         log.info 'SleepAppend1: appending second line'
         dst << "second line\n"
 
-        return "PromiseSleepAppend1: Completed"
+        // Convert the output to a Promise.value (of native datatype data)
+        return Promise.value("PromiseSleepAppend0: completed ")
     }
 }

@@ -1,9 +1,11 @@
 import ratpack.health.HealthCheckHandler
 
 import static ratpack.groovy.Groovy.ratpack
+
 //import logger.HelloLogger
 import logger.*
 import handlers.*
+import services.*
 
 ratpack {
 
@@ -11,6 +13,9 @@ ratpack {
     bindings {
         bind(HelloLogger)
         bind(FileHandler)
+        bind(FileService)
+        //bind(FileServiceInterface)
+        //bind(FileServiceInterface, FileService)
     }
 
     handlers {
@@ -47,10 +52,24 @@ ratpack {
             fileHandler.SleepAppend1()
             render "finished"
         }
-        get ("promisesleepappend1") { FileHandler fileHandler ->
+        get ("promisesleepappend0") { FileHandler fileHandler ->
 
-            fileHandler.PromiseSleepAppend1()
-            render "finished"
+            //initially coded like this
+            //fileHandler.PromiseSleepAppend1()
+
+            fileHandler.PromiseSleepAppend0().then { String promisedMessage ->
+                render promisedMessage
+            }
+
+            //render "finished"
+        }
+
+        get ("promisesleepappend1") { FileService fileService ->
+
+            fileService.PromiseSleepAppend1().then { String promisedMessage ->
+                render promisedMessage
+            }
+            //render "finished"
         }
     }
 
