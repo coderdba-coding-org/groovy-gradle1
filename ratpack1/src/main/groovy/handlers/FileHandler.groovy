@@ -45,4 +45,21 @@ class FileHandler {
         // Convert the output to a Promise.value (of native datatype data)
         return Promise.value("PromiseSleepAppend0: completed ")
     }
+
+    void sleepAndAppendFile() {
+        def src = new File("/tmp/s.txt")
+        def dst = new File("/tmp/d.txt")
+
+        log.info 'sleepAndAppendFile: appending first line'
+        dst << "first line\n"
+
+        log.info 'sleepAndAppendFile: sleeping'
+        sleep(10000)
+
+        log.info 'SleepAppend1: appending source file to dest file'
+        dst << src.text
+
+        log.info 'sleepAndAppendFile: appending second line'
+        dst << "second line\n"
+    }
 }

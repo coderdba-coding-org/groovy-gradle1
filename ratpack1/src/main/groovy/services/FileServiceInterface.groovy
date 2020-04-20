@@ -5,7 +5,8 @@ import ratpack.service.Service
 
 interface FileServiceInterface extends Service {
 
-    Promise<String> PromiseSleepAppend1();
+    Promise<String> DummyPromiseSleepAppend1()
+    Promise<String> PromiseSleepAppend1()
 
     /* --------------
     Promise<Long> lpush(String key, String value);
