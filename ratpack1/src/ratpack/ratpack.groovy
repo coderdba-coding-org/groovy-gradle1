@@ -74,6 +74,14 @@ ratpack {
 
         get ("promisesleepappend1") { FileService fileService ->
 
+            fileService.PromiseSleepAppend1XYZ().then { String promisedMessage ->
+                render promisedMessage
+            }
+            //render "finished"
+        }
+
+        get ("promisesleepappend1asynch") { FileService fileService ->
+
             fileService.PromiseSleepAppend1().then { String promisedMessage ->
                 render promisedMessage
             }

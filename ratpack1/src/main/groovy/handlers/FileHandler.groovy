@@ -54,12 +54,31 @@ class FileHandler {
         dst << "first line\n"
 
         log.info 'sleepAndAppendFile: sleeping'
-        sleep(10000)
+        sleep(5000)
 
-        log.info 'SleepAppend1: appending source file to dest file'
+        log.info 'sleepAndAppendFile: appending source file to dest file'
         dst << src.text
 
         log.info 'sleepAndAppendFile: appending second line'
         dst << "second line\n"
+    }
+
+    String sleepAndAppendFileWithReturn() {
+        def src = new File("/tmp/s.txt")
+        def dst = new File("/tmp/d.txt")
+
+        log.info 'sleepAndAppendFile: appending first line'
+        dst << "first line\n"
+
+        log.info 'sleepAndAppendFile: sleeping'
+        sleep(5000)
+
+        log.info 'sleepAndAppendFile: appending source file to dest file'
+        dst << src.text
+
+        log.info 'sleepAndAppendFile: appending second line'
+        dst << "second line\n"
+
+        return "sleepAndAppendFile: completed"
     }
 }

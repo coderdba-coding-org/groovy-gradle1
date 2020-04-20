@@ -1,6 +1,7 @@
 package services
 
 import handlers.FileHandler
+import ratpack.exec.Blocking
 
 import ratpack.exec.Promise
 
@@ -16,14 +17,25 @@ class FileService implements FileServiceInterface {
         return Promise.value("DummyPromiseSleepAppend1: completed ")
     }
 
-    Promise<String> PromiseSleepAppend1() {
-
+    Promise<String> PromiseSleepAppend1XYZ() {
         FileHandler fh = new FileHandler()
-        //handlers.FileHandler.sleepAndAppendFile()
+
         fh.sleepAndAppendFile()
 
         // Return with just plain native datatype does not work
         // Convert the output to a Promise.value (of native datatype data)
         return Promise.value("PromiseSleepAppend1: completed ")
+    }
+
+    Promise<String> PromiseSleepAppend1() {
+        FileHandler fh = new FileHandler()
+
+        Blocking.get {
+            fh.sleepAndAppendFileWithReturn() { String gotMessage ->
+                gotMessage
+                //return Promise.value("PromiseSleepAppend1: completed ")
+                }
+        }
+
     }
 }
