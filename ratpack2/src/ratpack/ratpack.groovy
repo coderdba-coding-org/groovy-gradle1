@@ -60,7 +60,7 @@ ratpack {
             }
         }
 
-\        path("backgroundpromisethen") { BackgroundExamples be ->
+        path("backgroundpromisethen") { BackgroundExamples be ->
             byMethod {
                 //get{ BackgroundExamples be ->
                 get{
@@ -82,9 +82,48 @@ ratpack {
         get ("promisesleepappend0") { BackgroundExamples be ->
 
             //initially coded like this
-            //fileHandler.PromiseSleepAppend1()
+            //be.PromiseSleepAppend1()
 
             be.PromiseSleepAppend0().then { String promisedMessage ->
+                render promisedMessage
+            }
+
+        }
+
+        get ("promisesync") { BackgroundExamples be ->
+
+            be.promisesync().then { String promisedMessage ->
+                println("promisesync: Calling thread: " + Thread.currentThread().name)
+                render promisedMessage
+            }
+
+        }
+
+        // Promise.asynch is asynch - so, you will get different threads
+        get ("promiseasync") { BackgroundExamples be ->
+
+            be.promiseasync().then { String promisedMessage ->
+                println("promiseasync: Calling thread: " + Thread.currentThread().name)
+                render promisedMessage
+            }
+
+        }
+
+        // Promise.asynch is asynch - so, you will get different threads
+        get ("promiseasyncthread") { BackgroundExamples be ->
+
+            be.promiseasyncthread().then { String promisedMessage ->
+                println("promiseasyncthread: Calling thread: " + Thread.currentThread().name)
+                render promisedMessage
+            }
+
+        }
+
+        // blocking get is asynch - so, you will get different threads
+        get ("blockingget") { BackgroundExamples be ->
+
+            be.blockingget().then { String promisedMessage ->
+                println("blockingget: Calling thread: " + Thread.currentThread().name)
                 render promisedMessage
             }
 
