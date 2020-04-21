@@ -1,4 +1,5 @@
 import ratpack.health.HealthCheckHandler
+import services.CheckThingsService
 
 import static groovy.json.JsonOutput.toJson
 import static ratpack.groovy.Groovy.ratpack
@@ -10,6 +11,7 @@ ratpack {
     bindings {
 
         bind(BackgroundExamples)
+        bind(CheckThingsService)
     }
 
     handlers {
@@ -53,9 +55,10 @@ ratpack {
             byMethod {
                 //get{ BackgroundExamples be ->
                 get{
-                    be.backgroundOperation()
-                    render "completed operation work" // need a render here as the method called above does not return anything browser throws error - no response sent to GET call
+                    //be.backgroundOperation()
+                    //render "completed operation work" // need a render here as the method called above does not return anything browser throws error - no response sent to GET call
 
+                    be.backgroundOperation().then { render "completed operation work" }
                 }
             }
         }

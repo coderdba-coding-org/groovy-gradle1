@@ -37,6 +37,11 @@ class BackgroundExamples {
         sleep(1000)
 
         println("backgroundOperation: ending")
+
+        // as we are not flatmapping from another Promise, we just get a null promise and cast it as operation()
+        // otherwise it will give null pointer error for this operation - when 'then' is called
+        // usually an operation is kind of end part of an execution block that starts with some promise
+        Promise.ofNull().operation()
     }
 
     Promise<String> backgroundPromise() {
