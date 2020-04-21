@@ -59,18 +59,4 @@ class DefaultEmployeeService implements IEmployeeService{
             return employees
         }
     }
-
-    Operation background1() {
-
-        println("background1: thread: " + Thread.currentThread().name)
-        println("background1: starting")
-
-        println("background1: sleep1 begin")
-        sleep(3000)
-
-        println("background1: sleep2 begin")
-        sleep(2000)
-
-        println("background1: ending")
-    }
 }

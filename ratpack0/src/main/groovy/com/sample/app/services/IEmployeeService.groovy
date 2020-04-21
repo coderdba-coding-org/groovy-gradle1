@@ -14,6 +14,4 @@ interface IEmployeeService {
     Promise<List<Employee>> asyncList()
 
     Promise<List<Employee>> valueList()
-
-    Operation background1()
 }
