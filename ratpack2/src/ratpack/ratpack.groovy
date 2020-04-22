@@ -90,13 +90,30 @@ ratpack {
             be.PromiseSleepAppend0().then { String promisedMessage ->
                 render promisedMessage
             }
-
         }
 
         get ("promisesync") { BackgroundExamples be ->
 
             be.promisesync().then { String promisedMessage ->
                 println("promisesync: Calling thread: " + Thread.currentThread().name)
+                render promisedMessage
+            }
+
+        }
+
+        get ("promisesyncmap") { BackgroundExamples be ->
+
+            be.promisesyncMap().then { String promisedMessage ->
+                println("promisesyncmap: Calling thread: " + Thread.currentThread().name)
+                render promisedMessage
+            }
+
+        }
+
+        get ("promisesyncflatmap") { BackgroundExamples be ->
+
+            be.promisesyncFlatmap().then { String promisedMessage ->
+                println("promisesyncflatmap: Calling thread: " + Thread.currentThread().name)
                 render promisedMessage
             }
 
@@ -111,6 +128,7 @@ ratpack {
             }
 
         }
+
 
         // Promise.asynch is asynch - so, you will get different threads
         get ("promiseasyncthread") { BackgroundExamples be ->

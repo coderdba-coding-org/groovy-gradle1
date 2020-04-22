@@ -85,6 +85,26 @@ class BackgroundExamples {
         }
     }
 
+    Promise<String> promisesyncMap() {
+        promisesync().map { String gotMessage ->
+            gotMessage.toUpperCase()
+        }
+    }
+
+    Promise<String> promisesyncMap(String inMessage) {
+        promisesync().map { String gotMessage ->
+            def String newMessage = gotMessage + ": appended : " + inMessage
+            newMessage.toUpperCase()
+        }
+    }
+
+    Promise<String> promisesyncFlatmap() {
+        promisesync().flatMap { String gotMessage ->
+            promisesyncMap(gotMessage)
+        }
+    }
+
+    // this HANGS - not proper code - see other methods below which use fork and thread
     Promise<String> promiseasyncThisHangs() {
 
         Promise.async {
