@@ -17,8 +17,8 @@ class CheckThingsService implements Service{
 
         println("CheckThingsService: onStart() ... waking up")
 
-        //simpleReconcileLoop()
-        execReconcileLoop()
+        simpleReconcileLoop()
+        //execReconcileLoop()
     }
 
     // LOOP EXAMPLE1
@@ -28,6 +28,9 @@ class CheckThingsService implements Service{
 
         while(true) {
             println("CheckThingsService: simpleReconcileLoop() ... while loop repeat")
+
+            // can add look for vm quueue and create / destroy vms
+
             sleep (300000)
         }
     }

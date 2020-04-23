@@ -51,6 +51,15 @@ ratpack {
             }
         }
 
+        path("backgroundpromise2") { BackgroundExamples be ->
+            byMethod {
+                //get{ BackgroundExamples be ->
+                get{
+                    render (be.backgroundPromise2())
+                }
+            }
+        }
+
         path("backgroundoperation") { BackgroundExamples be ->
             byMethod {
                 //get{ BackgroundExamples be ->
@@ -146,6 +155,15 @@ ratpack {
             be.blockingget().then { String promisedMessage ->
                 println("blockingget: Calling thread: " + Thread.currentThread().name)
                 render promisedMessage
+            }
+
+        }
+
+        get ("promisesyncflatmapint") { BackgroundExamples be ->
+
+            be.promisesyncFlatmapInt().then { Integer promisedMessage ->
+                println("blockingget: Calling thread: " + Thread.currentThread().name)
+                render promisedMessage.toString()
             }
 
         }

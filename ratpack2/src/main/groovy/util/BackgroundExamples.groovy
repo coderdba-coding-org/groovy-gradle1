@@ -87,20 +87,33 @@ class BackgroundExamples {
 
     Promise<String> promisesyncMap() {
         promisesync().map { String gotMessage ->
-            gotMessage.toUpperCase()
+            return gotMessage.toUpperCase()
         }
     }
 
     Promise<String> promisesyncMap(String inMessage) {
         promisesync().map { String gotMessage ->
             def String newMessage = gotMessage + ": appended : " + inMessage
-            newMessage.toUpperCase()
+            return newMessage.toUpperCase()
         }
     }
 
     Promise<String> promisesyncFlatmap() {
         promisesync().flatMap { String gotMessage ->
-            promisesyncMap(gotMessage)
+            return promisesyncMap(gotMessage)
+        }
+    }
+
+    Promise<Integer> promisesyncMapInt(String inMessage) {
+        promisesync().map { String gotMessage ->
+            def String newMessage = gotMessage + ": appended : " + inMessage
+            return newMessage.toUpperCase().hashCode()
+        }
+    }
+
+    Promise<Integer> promisesyncFlatmapInt() {
+        promisesync().flatMap { String gotMessage ->
+            return promisesyncMapInt(gotMessage)
         }
     }
 
@@ -164,6 +177,24 @@ class BackgroundExamples {
 
             // no need to convert this to Promise.value() when using Blocking.get()
             return "Completed: blockingget"
+        }
+    }
+
+    Promise<String> backgroundPromise2() {
+
+        Promise.sync {
+            println("background1: thread: " + Thread.currentThread().name)
+            println("background1: starting")
+
+            println("background1: sleep1 begin")
+            sleep(2000)
+
+            println("background1: sleep2 begin")
+            sleep(1000)
+
+            println("background1: ending")
+
+            return "Completed: backgroundPromise"
         }
     }
 
