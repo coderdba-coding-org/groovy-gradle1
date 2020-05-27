@@ -11,6 +11,8 @@ ratpack {
     bindings {
 
         bind(BackgroundExamples)
+
+        // services must have 'fork' - otherwise, they will block from proceeding further
         bind(CheckThingsService)
     }
 

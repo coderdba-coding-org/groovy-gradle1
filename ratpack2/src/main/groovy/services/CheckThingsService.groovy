@@ -17,26 +17,15 @@ class CheckThingsService implements Service{
 
         println("CheckThingsService: onStart() ... waking up")
 
-        simpleReconcileLoop()
-        //execReconcileLoop()
+        // USE: A fork loop - DOES NOT BLOCK other things when this class is 'bind' in ratpack.groovy
+        execForkReconcileLoop()
+
+        // DONT-USE: non-fork loop - blocks other things when this class is 'bind' in ratpack.groovy
+        // nonForkReconcileLoop()
     }
 
-    // LOOP EXAMPLE1
-    void simpleReconcileLoop() {
-
-        println("CheckThingsService: simpleReconcileLoop() ... starting the loop")
-
-        while(true) {
-            println("CheckThingsService: simpleReconcileLoop() ... while loop repeat")
-
-            // can add look for vm quueue and create / destroy vms
-
-            sleep (300000)
-        }
-    }
-
-    // LOOP EXAMPLE2
-    void execReconcileLoop() {
+    // FORK LOOP - GOOD - DOES NOT BLOCK OTHERS WHEN BOUND
+    void execForkReconcileLoop() {
 
         println("CheckThingsService: execReconcileLoop(): ... starting the loop")
 
@@ -54,6 +43,21 @@ class CheckThingsService implements Service{
             Execution.current().controller.executor.schedule(this.&reconcileLoop, sleepTime, TimeUnit.MILLISECONDS)
         }.start {
             doReconcile().then { null }
+        }
+    }
+
+    // NON-FORK LOOP - BAD - BLOCKS OTHERS WHEN BOUND
+    // This, without 'fork' will block starting ratpack server when 'bind' is done in ratpack.groovy
+    void nonForkReconcileLoop() {
+
+        println("CheckThingsService: simpleReconcileLoop() ... starting the loop")
+
+        while(true) {
+            println("CheckThingsService: simpleReconcileLoop() ... while loop repeat")
+
+            // can add look for vm quueue and create / destroy vms
+
+            sleep (300000)
         }
     }
 
